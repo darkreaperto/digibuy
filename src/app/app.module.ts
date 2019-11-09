@@ -11,12 +11,15 @@ import { ProductoCreateComponent } from './producto/producto-create/producto-cre
 import { ProductosService } from './producto/productos.service';
 import { ProductoEditComponent } from './producto/producto-edit/producto-edit.component';
 
+import { FileSelectDirective } from 'ng2-file-upload';
+
 @NgModule({
   declarations: [
     AppComponent,
     ProductoGetComponent,
     ProductoCreateComponent,
-    ProductoEditComponent
+    ProductoEditComponent,
+    FileSelectDirective
   ],
   imports: [
     BrowserModule,

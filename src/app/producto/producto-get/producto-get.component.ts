@@ -12,6 +12,8 @@ import { ProductosService } from '../productos.service';
 export class ProductoGetComponent implements OnInit {
 
   productos: Product[];
+  isAdmin: false;
+
   constructor(private ps: ProductosService, private router: Router) { }
 
   deleteProducto(id) {
@@ -29,6 +31,16 @@ export class ProductoGetComponent implements OnInit {
       .subscribe((products: Product[]) => {
         this.productos = products;
       });
+  }
+
+  /*getImage(filename) {
+    console.log("fn: " + this.ps.getImage(filename));
+    return this.ps.getImage(filename);
+  }*/
+
+  getFile(filename) {
+    console.log("fn: " + this.ps.getFile(filename));
+    return this.ps.getFile(filename);
   }
 
   ngOnInit() {

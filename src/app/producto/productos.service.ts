@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import {  FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,10 @@ import { Router } from '@angular/router';
 export class ProductosService {
 
   uri = 'http://localhost:4000/products';
+  //img = 'http://localhost:4000/image';
+  files_static = 'http://localhost:4000/uploads';
+
+  //public uploader: FileUploader = new FileUploader({ url: `${this.uri}/image-upload`, itemAlias: 'photo'});
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -19,19 +24,36 @@ export class ProductosService {
             .get(`${this.uri}`);
   }
 
+  /*getImage(filename) {
+    console.log(`${this.img}/${filename}`);
+    console.log("uri => " + JSON.stringify(this.http.get(`${this.img}/${filename}`)));
+    console.log("uri => " + this.http.get(`${this.img}/${filename}`));
+    return this.http.get(`${this.img}/${filename}`).
+      subscribe(res => console.log("Done"));
+  }*/
+
+  getFile(filename) {
+    return `${this.files_static}/${filename}`;
+    //return this.http.get(`http://localhost:4000/uploads/${filename}`);
+  }
+
   /*
     Agregar nuevo producto
     Los parametros deben llamarse igual que los campos en la tabla de la bd
   */
-  createProducto(name, description, price) {
+  createProducto(name, description, price, filename) {
     const obj = {
       name,
       description,
-      price
+      price,
+      filename
     };
     console.log(obj);
     this.http.post(`${this.uri}/create`, obj)
         .subscribe(res => console.log("Done"));
+
+    //console.log(this.uploadImage(image));
+    //console.log(this.uploader.uploadAll());
   }
 
   editProducto(id) {
@@ -59,12 +81,13 @@ export class ProductosService {
             //.subscribe(res => this.router.navigate(['productos']));
   }
 
-  public uploadImage(image: File) {
+  uploadImage(image: File, filename) {
     const formData = new FormData();
 
-    formData.append('image', image);
+    formData.append('image', image, filename);
 
-    return this.http.post('/api/v1/image-upload', formData);
+    this.http.post(`${this.uri}/image-upload`, formData)
+              .subscribe(res => console.log(res));
   }
 
 }

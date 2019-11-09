@@ -5,6 +5,7 @@
       <td>Product Name</td>
       <td>Product Description</td>
       <td>Product Price</td>
+      <td>Product Image</td>
       <td colspan="2">Actions</td>
   </tr>
   </thead>
@@ -14,8 +15,9 @@
           <td>{{ product.name }}</td>
           <td>{{ product.description }}</td>
           <td>{{ product.price }}</td>
-          <td><a [routerLink]="['edit', product.id]" class="btn btn-primary">Edit</a></td>
-          <td><a (click) = "deleteProducto(product.id)" class="btn btn-danger">Delete</a></td>
+          <img [src]="ps.getFile(product.filename)" width="100px" alt="">
+          <td><a [routerLink]="['edit', product.id]" class="btn btn-primary" *ngIf isAdmin >Edit</a></td>
+          <td><a (click) = "deleteProducto(product.id)" class="btn btn-danger" *ngIf isAdmin >Delete</a></td>
       </tr>
   </tbody>
 </table>

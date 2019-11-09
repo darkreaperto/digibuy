@@ -4,5 +4,5 @@ export default class Producto {
   ProductName: string;
   ProductDescription: string;
   ProductPrice: number;
-
+  ProductImageURL: string;
 }

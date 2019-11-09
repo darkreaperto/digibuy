@@ -47,13 +47,9 @@
       </div>
 
       <div class="form-group">
-        <label class="image-upload-container btn btn-bwm">
-          <span>Select Image</span>
-          <input #imageInput
-            type="file"
-            accept="image/*"
-            (change)="processFile(imageInput)">
-        </label>
+        <!-- <input type="file" name="photo" ng2FileSelect [uploader]="ps.uploader" #imageInput /> -->
+        <input type="file" (change)="onFileSelected($event)" />
+
       </div>
 
       <div class="form-group">
